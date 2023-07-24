@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Page;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -254,6 +255,23 @@ class SiteController extends Controller
 
         return $this->render('resendVerificationEmail', [
             'model' => $model
+        ]);
+    }
+
+    /**
+     * Render custom page content
+     * 
+     * @return Response
+     */
+    public function actionPage($url)
+    {
+        if (!$page = Page::findByPrettyUrl($url))
+        {
+            return null;
+        }
+
+        return $this->render('page', [
+            'page' => $page,
         ]);
     }
 }

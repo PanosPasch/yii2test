@@ -43,6 +43,15 @@ return [
             'rules' => [
             ],
         ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'hostInfo' => 'frontend.test',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<url:[a-z-]+>' => 'site/page',
+            ],
+        ],
     ],
     'params' => $params,
 ];

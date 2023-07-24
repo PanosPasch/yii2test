@@ -20,7 +20,7 @@ $pages = $model->list();
         <?php foreach($pages as $page){ ?>
             
             <div class="form-group">
-                <p> <?= $page['title'] ?></p>
+                <p> <a href="//<?= Yii::$app->urlManagerFrontend->createAbsoluteUrl(['site/page', 'url' => $page['pretty_url']]); ?> "><?= $page['title'] ?> </a></p>
                 <div class="btn-group-sm d-inline">
                     
                     <?php $form_delete = ActiveForm::begin(['id' => 'edit-pages', 'options' => ['class' => 'd-inline']]); ?>

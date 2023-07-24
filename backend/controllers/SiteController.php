@@ -132,8 +132,9 @@ class SiteController extends Controller
      */
     public function actionMyPages()
     {
-        $model = new CreatePage();
         $request = Yii::$app->request;
+        $model = new CreatePage();
+        $model->getErrors();
 
         //if deletion request is sent, delete page
         if ($request->post() && $request->post('type') === 'delete')
@@ -164,7 +165,7 @@ class SiteController extends Controller
 
         //submit edited page
         if ($model->load($request->post()) ) {
-            if($model->create())
+            if($model->edit())
             {
                 return $this->goHome();
             }
