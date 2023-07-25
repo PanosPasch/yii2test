@@ -25,13 +25,14 @@ class m130524_201442_init extends Migration
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->createTable('{{%user}}', [
+        $this->createTable('{{%page}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
             'text' => $this->text()->notNull(),
             'pretty_url' => $this->string()->notNull()->unique(),
             'image' => $this->string()->unique(),
             'category' => $this->smallInteger()->notNull()->defaultValue(0),
+            'user_id' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -55,6 +56,15 @@ class m130524_201442_init extends Migration
 
     public function down()
     {
+        $this->dropForeignKey(
+            'fk-page-user_id',
+            'page'
+        );
+        $this->dropIndex(
+            'idx-page-user_id',
+            'page'
+        );
+        $this->dropTable('{{%page}}');
         $this->dropTable('{{%user}}');
     }
 }
